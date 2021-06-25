@@ -1,3 +1,7 @@
 # javascript-practice
 
-This is my Javascript practice codes' repository
+Current Daily To-Dos:
+- Typing Practice - 30 mins
+- Study FCC Topics
+- Practice Coding Problems
+- Push all codes on Github
