@@ -29,24 +29,43 @@ Keep the relative order of the numbers in each sub-array the same as the order i
 
 */
 
-function group(arr, size) {
-	const sortedArr = arr.sort((left, right) => left - right);
-	const arraysCount = Math.ceil(arr.length / size);
-	const resultArr = [];
+// function group(arr, size) {
+// 	const sortedArr = arr.sort((left, right) => left - right);
+// 	const arraysCount = Math.ceil(arr.length / size);
+// 	const resultArr = [];
 	
-	for(let i = 0; i < arraysCount; i++) {
-		resultArr[i] = []
-	}
+// 	for(let i = 0; i < arraysCount; i++) {
+// 		resultArr[i] = []
+// 	}
 	
-	for(let i = 0; i < sortedArr.length; i+= arraysCount) {
-		for (let j = 0; j < arraysCount; j ++) {
-			value = sortedArr[i + j]
-			if (value) resultArr[j].push(value)
+// 	for(let i = 0; i < sortedArr.length; i+= arraysCount) {
+// 		for (let j = 0; j < arraysCount; j ++) {
+// 			value = sortedArr[i + j]
+// 			if (value) resultArr[j].push(value)
+// 		}
+// 	}
+	
+// 	return resultArr;
+// };
+
+const group = (arr, size) => {
+	let arrCount = Math.ceil(arr.length / size);
+	let arrNum = 0;
+	let firstArr = [];
+	for(let i = 0; i < arrCount; i++) {
+		firstArr.push([]);
+	} // runs arrCount * n times where arrCount is contsant. 
+
+	for(let i = 0; i < arr.length; i++) {
+		firstArr[arrNum].push(arr[i]);
+		arrNum++;
+		if(firstArr[arrNum] === undefined) {
+			arrNum = 0;
 		}
-	}
-	
-	return resultArr;
-};
+	} // runs arr.length * n times 
+	return firstArr;
+} // runs x * n + y * n times
+  // therefore time complexity is O(n)
 
 group([1, 2, 3, 4], 2);
 
@@ -55,3 +74,7 @@ group([1, 2, 3, 4, 5, 6, 7], 4) ;
 group([1, 2, 3, 4, 5], 1);
 
 group([1, 2, 3, 4, 5, 6], 4);
+
+group([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 4);
+
+group([1, 2, 3, 4, 5, 6], 3);

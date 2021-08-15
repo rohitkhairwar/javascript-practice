@@ -25,25 +25,55 @@ Any happy number will have a 1 in its sequence, and every unhappy number will ha
 The only numbers passed to your function will be positive whole numbers.
 */
 
-function happy(num) {
-    let  sum = 0;
-    let result=false;
-    for (const elem of num.toString().split("")) {
-        sum = sum + elem*elem;        
-    }   
-​
-    if (sum == 1){
-        result = true;
-    } else if (sum == 4){
-        result = false;
-    } else {
-        result = happy(sum);
-    }
-    return result;
+// function happy(num) {
+//     let  sum = 0;
+//     let result=false;
+//     for (const elem of num.toString().split("")) {
+//         sum = sum + elem*elem;        
+//     }   
+// ​
+//     if (sum == 1){
+//         result = true;
+//     } else if (sum == 4){
+//         result = false;
+//     } else {
+//         result = happy(sum);
+//     }
+//     return result;
   
-};
+// };
 
+function sepNum (num) {
+    let sepArr = [];
+    while (num > 0) {
+        sepArr.unshift(num % 10);
+        num = Math.floor(num / 10);
+    }
+    return sepArr;
+}; // runs x *n number of times depending on no.of digits in num
 
+function addSepNumDigits (arr) {
+    let addNum = 0;
+    for(let i = 0; i < arr.length; i++) {
+        addNum += Math.pow(arr[i], 2);
+    }
+    return addNum;
+} // runs k * n number of times depending on arr length;
+
+const happy = (num) => {
+    let sum = 0;
+        while(addSepNumDigits(sepNum(num)) !== 4) {
+            sum = addSepNumDigits(sepNum(num));
+            num = sum;
+            if(num === 1) {
+                return true;
+            }
+        }
+        return false;
+} // runs k * n + x * n number of times depending on the times it takes to return either 1 or 4
+  // which means the function runs z * n number of times which means
+  // time complexity of function happy is O(z * n) === O(n)
+  
 happy(203);
 
 happy(11);

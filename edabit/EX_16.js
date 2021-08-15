@@ -36,27 +36,72 @@ Notes
 Return null if consecutive prime numbers are not found with the required gap.
 */
 
-const primeGaps = (g, a, b) => {
-    const sieve = () => {
-      const isPrime = Array(b + 1).fill(true);
-      isPrime[0] = isPrime[1] = false;
-      for (let p = 2; p * p <= b; ++p) {
-        if (isPrime[p]) for (let j = p * p; j <= b; j += p) isPrime[j] = false;
+// const primeGaps = (g, a, b) => {
+//     const sieve = () => {
+//       const isPrime = Array(b + 1).fill(true);
+//       isPrime[0] = isPrime[1] = false;
+//       for (let p = 2; p * p <= b; ++p) {
+//         if (isPrime[p]) for (let j = p * p; j <= b; j += p) isPrime[j] = false;
+//       }
+  
+//       const primes = [];
+//       for (let i = 0; i < isPrime.length; ++i)
+//         isPrime[i] && i >= a && i <= b && primes.push(i);
+//       return primes;
+//     };
+  
+//     const primes = sieve();
+//     for (let i = 0; i < primes.length - 1; ++i) {
+//       if (primes[i + 1] - primes[i] === g) return [primes[i], primes[i + 1]];
+//     }
+  
+//     return null;
+//   };
+
+// time complexity : O(x)
+const isPrime = (x) => {
+  if(x === 1) {
+    return false;
+  } else if(x === 2) {
+    return true;
+  } else {
+    for (let i = 2; i < x; i++) {
+      if ((x % i) === 0) {
+        return false; 
       }
-  
-      const primes = [];
-      for (let i = 0; i < isPrime.length; ++i)
-        isPrime[i] && i >= a && i <= b && primes.push(i);
-      return primes;
-    };
-  
-    const primes = sieve();
-    for (let i = 0; i < primes.length - 1; ++i) {
-      if (primes[i + 1] - primes[i] === g) return [primes[i], primes[i + 1]];
     }
-  
-    return null;
-  };
+  }
+  return true;
+} // runs x * n times where x is constant & n depends on the input
+
+isPrime(1);
+isPrime(2);
+isPrime(3);
+isPrime(4);
+isPrime(5);
+isPrime(6);
+isPrime(9);
+
+const diff = (a, b) => {
+  return (b - a);
+} // runs 1 time
+
+const primeGaps = (g, a, b) => {
+  let primeArr = [];
+  for(let i = a; i <= b; i++) {
+    if(isPrime(i)) {
+        primeArr.push(i);
+    }
+    if(primeArr.length === 2 && diff(primeArr[0], primeArr[1]) === g) {
+      return primeArr;
+    } else
+    if(primeArr.length === 2 && diff(primeArr[0], primeArr[1]) !== g) {
+      primeArr = [];
+    }
+  }
+  return null;
+} // runs 1 + 1 + x * n times which is z * n where z is constant... therefore
+  // time complexity is O(n)
 
   primeGaps(2, 5, 7); 
 

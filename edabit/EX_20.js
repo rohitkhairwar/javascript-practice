@@ -34,25 +34,70 @@ Trivia: As far as we know, numbers 2 and 5 are the only two primes present in th
 
 */
 
-function isUntouchable(number) {
-    if(number <= 1) return "Invalid Input"
-    let res = []
-    let hasta = number ** 2
-    for (let i = 2; i <= hasta; i++){
-        let count = 0
-        for(let j = 0; j < i; j++){
-            if(i % j === 0){
-                count += j
-            }
-        }
-        if(count === number){
-            res.push(i)
+// function isUntouchable(number) {
+//     if(number <= 1) return "Invalid Input"
+//     let res = []
+//     let hasta = number ** 2
+//     for (let i = 2; i <= hasta; i++){
+//         let count = 0
+//         for(let j = 0; j < i; j++){
+//             if(i % j === 0){
+//                 count += j
+//             }
+//         }
+//         if(count === number){
+//             res.push(i)
+//         }
+//     }
+//     return res.length === 0 ? true : res
+// };
+
+const divisorsOfNum = (num) => {
+    let divisorsArr = [];
+    for(let i = 1; i < num; i++) {
+        if(num % i === 0) {
+            divisorsArr.push(i);
         }
     }
-    return res.length === 0 ? true : res
-};
+    return divisorsArr;
+}; // runs x * n times where x is constant and n depends on num input.
 
-isUntouchable(3;
+const sumOfArrelements = (arr) => {
+    let sum = 0; 
+    for(let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+    return sum;
+}; // runs y * n times where y is const & n depends on arr.length 
+const isUntouchable = (num) => {
+    let numArr = [];
+    let touchableArr = [];
+    let divisorsOfEachNumInRange;
+    if (num <= 1) {
+        return "Invalid Input";
+    };
+    for(let i = num; i <= (num * num); i++) {
+        numArr.push(i);
+    }; // runs z * n times where z is constant & n depends on num input
+    for(let i = 0; i < numArr.length; i++) {
+        divisorsOfEachNumInRange = divisorsOfNum(numArr[i]);
+        if (sumOfArrelements(divisorsOfEachNumInRange) === num) {
+            touchableArr.push(numArr[i]);
+        } // runs ((x * n) + (y * n)) * (z * n) times where z is const & n depends on numArr.length
+        divisorsOfEachNumInRange = [];
+    }
+
+    if(touchableArr.length === 0) {
+        return true;
+    } else {
+        return touchableArr;
+    }
+}; // runs (x + y) * z * n2 times 
+   // therefore time complexity is O(n2) or O(n square).
+
+isUntouchable(1);
+
+isUntouchable(3);
 
 isUntouchable(6);
 
