@@ -43,36 +43,40 @@ Return null if consecutive prime numbers are not found with the required gap.
 //       for (let p = 2; p * p <= b; ++p) {
 //         if (isPrime[p]) for (let j = p * p; j <= b; j += p) isPrime[j] = false;
 //       }
-  
+
 //       const primes = [];
 //       for (let i = 0; i < isPrime.length; ++i)
 //         isPrime[i] && i >= a && i <= b && primes.push(i);
 //       return primes;
 //     };
-  
+
 //     const primes = sieve();
 //     for (let i = 0; i < primes.length - 1; ++i) {
 //       if (primes[i + 1] - primes[i] === g) return [primes[i], primes[i + 1]];
 //     }
-  
+
 //     return null;
 //   };
 
-// time complexity : O(x)
-const isPrime = (x) => {
-  if(x === 1) {
+// TC: O(n), where n = num.
+// As this function passes through 2..(sqrt of n) once, the time complexity is  O(sqrt n).
+// if n = 1e6(1 million) 1e6 - 2 = very minute.
+const isPrime = (num) => {
+  if (num === 1) {
     return false;
-  } else if(x === 2) {
+  } else if (num === 2) {
     return true;
   } else {
-    for (let i = 2; i < x; i++) {
-      if ((x % i) === 0) {
-        return false; 
+    for (let i = 2; i < Math.sqrt(num); i++) {
+      if (num % i === 0) {
+        return false;
       }
     }
   }
   return true;
-} // runs x * n times where x is constant & n depends on the input
+};
+
+// isPrimeInSqrt -> implement + TC.
 
 isPrime(1);
 isPrime(2);
@@ -82,29 +86,40 @@ isPrime(5);
 isPrime(6);
 isPrime(9);
 
+// TC: O(1).
 const diff = (a, b) => {
-  return (b - a);
-} // runs 1 time
+  return b - a;
+}; // runs 1 time = in constant time.
 
+// In the worst case, a = 1, b = max_value(m).
+// TC: O(m*n) => O(m^2).
+
+// Updated TC: O(m*sqrt(m))
 const primeGaps = (g, a, b) => {
   let primeArr = [];
-  for(let i = a; i <= b; i++) {
-    if(isPrime(i)) {
-        primeArr.push(i);
+
+  // runs (b-a+1) times.
+  // a = 5, b = 10 => 5, 6, 7, 8, 9, 10 => 10-5+1 = 6
+  // looping from 1...m
+  // => in isPrime(), iterations => 1 + 2 + 3 + ... + sqrt m => sqrt m * (sqrt m + 1) / 2 
+  // => (sqrt m^2+sqrt m)/2 => O((sqrt m^2+sqrt m)/2) => O(sqrt m^2+sqrt m) => O(sqrt m^2) => O(m).
+  for (let i = a; i <= b; i++) {
+    // O(n).
+    if (isPrime(i)) {
+      primeArr.push(i);
     }
-    if(primeArr.length === 2 && diff(primeArr[0], primeArr[1]) === g) {
+    if (primeArr.length === 2 && diff(primeArr[0], primeArr[1]) === g) {
       return primeArr;
-    } else
-    if(primeArr.length === 2 && diff(primeArr[0], primeArr[1]) !== g) {
+    } else if (primeArr.length === 2 && diff(primeArr[0], primeArr[1]) !== g) {
       primeArr = [];
     }
   }
   return null;
-} // runs 1 + 1 + x * n times which is z * n where z is constant... therefore
-  // time complexity is O(n)
+}; // runs 1 + 1 + x * n times which is z * n where z is constant... therefore
+// time complexity is O(n)
 
-  primeGaps(2, 5, 7); 
+primeGaps(2, 5, 7);
 
-  primeGaps(2, 5, 5); 
-  
-  primeGaps(4, 130, 200);
+primeGaps(2, 5, 5);
+
+primeGaps(4, 130, 200);
