@@ -47,6 +47,7 @@ function trace (arr) {
          sum += arr[i][i];
      }
      return sum;
+     
 };
 
 trace([
