@@ -13,27 +13,27 @@ Notes
 If the input tries to divide by 0, return: "Can't divide by 0!"
 
 */
-
+ //T.C - O(n)
+ 
 const calculator = (a, b, c) => {
     if (b === "/" && c === 0) {
         return "Can't divide by 0!"
-    } else {
+    } else 
         if (b === "+") {
             return a + c;
-        }
-    } else {
+        
+    } else 
         if (b === "-") {
             return a - c;
-        })
-    } else {
+        
+    } else 
         if (b === "*") {
             return a * c;
-        })
+        
     } 
-    else {
+      else 
         if (b === "/") {
             return a / c;
-        })
     } 
 };
 
