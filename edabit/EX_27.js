@@ -14,13 +14,14 @@ If the number is negative, treat it like it's positive.
 
 
 */
-
+//T.C. - O(n)
 const rev = (num) => {
     let numb; 
     if(num < 0) {
         numb = -1 * num;
-    }else
-    numb = num;
+    }else {
+        numb = num;
+    }
     let arr = [];
     let revNum = 0;
 

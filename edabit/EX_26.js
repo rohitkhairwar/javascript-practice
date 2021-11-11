@@ -16,14 +16,18 @@ All items in the array will be integers.
 */
 
 const indexMultiplier = (arr) => {
-    if(arr.length === 0) {
+    if (arr.length === 0 || arr.length === 1) {
         return 0;
     } else {
         let indexArr = [];
         for(let i = 0; i < arr.length; i++) {
             indexArr.push(i * arr[i]);
         }
-        return indexArr;
+        let a = 0;
+        for (let i = 0; i < indexArr.length; i++) {
+            a += indexArr[i];
+        }
+        return a;
     }
     
 };

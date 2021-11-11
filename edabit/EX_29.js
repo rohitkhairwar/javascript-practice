@@ -19,8 +19,15 @@ Bonus: Try to complete this challenge in one line!
 const multiplyNums = (str) => {
     let arr = [];
     let product = 1;
+    let sign = 0;
     for(let i = 0; i < str.length; i++) {
-        if(str[i] == parseInt(str[i]) || str[i] == -parseInt(str[i])) {
+        if(str[i] === '""'  ) {
+            continue;
+        } else {
+            if (str[i] === "-") {
+                sign++;
+            }
+        } else {
             arr.push(str[i]);
         }
     }
