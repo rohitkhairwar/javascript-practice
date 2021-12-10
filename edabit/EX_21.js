@@ -38,7 +38,23 @@ isAstonishing(2002077) ➞ "BA-Astonishing"
 // It's Astonishing and partition a is greater than partition b
 */
 
+// T.C. = O(n)
+// num = "54321" => len = 5
+// x = 54321
+// log10(x) = ?
+// log10(54321) = log10(10^y) = 4.7...
 
+// 50000 + 4000 + 300 + 20 + 1
+// 5 * 10^4 + 4 * 10^3 + 3 * 10^2 + 2 * 10^1 + 1 * 10^0
+// 
+
+// 10^1000 => length will be 1001 digits = 10000000000000000000000... (1000 0s)
+// num = "-----"
+//        01234
+// here, 0th will be the most significant digit
+// and, 4th will be the least significant digit
+// e.g., num = 11111.5823401
+// TC = O(log10 n)
 const sepNum = (num) => {
     let numInString = num.toString();
     let arr = [];
@@ -52,12 +68,13 @@ const sepNum = (num) => {
         divNum *= 10;
     }
     return arr;
-}; //T.C. = O(n)
+}; 
 
+// T.C. = O(n) -> O(M), where M = max value of integer
 const addNumsOfArr = (arr) => {
     let sum = 0;
     if(arr[0] < arr[1]) {
-        for(let i = arr[0]; i <=arr[1]; i++) {
+        for(let i = arr[0]; i <= arr[1]; i++) {
             sum += i;
         }
     } else {
@@ -66,11 +83,12 @@ const addNumsOfArr = (arr) => {
         }
     }
     return sum;
-}; // T.C. = O(n)
+};
 
+// T.C. = O(n^2) -> O(log10 n * M), where n = length of num, M = max value of integer
 const isAstonishing = (num) => {
-    let arr = sepNum(num);
-    for(let i = 0; i < arr.length; i++) {
+    let arr = sepNum(num); // O(log10 n).
+    for(let i = 0; i < arr.length; i++) { // this loop runs n times.
         if(arr[i][0] < arr[i][1] && addNumsOfArr(arr[i]) === num) {
             return "AB-Astonishing";
         } else 
@@ -79,7 +97,7 @@ const isAstonishing = (num) => {
         }        
     }
     return false;
-}; // T.C. = O(n2)
+}; 
 
 isAstonishing(15);
 isAstonishing(4020);
