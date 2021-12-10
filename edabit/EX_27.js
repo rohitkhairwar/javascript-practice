@@ -15,7 +15,8 @@ If the number is negative, treat it like it's positive.
 
 */
 
-const rev = (num) => {
+// T.C. - O(n)
+    const rev = (num) => {
     let numb; 
     if(num < 0) {
         numb = -1 * num;

@@ -14,20 +14,23 @@ Notes
 All items in the array will be integers.
 
 */
-
+// T.C. O(n)
 const indexMultiplier = (arr) => {
-    if(arr.length === 0) {
+    let sum = 0;
+    if(arr.length === 0 || arr.length === 1) {
         return 0;
     } else {
         let indexArr = [];
         for(let i = 0; i < arr.length; i++) {
             indexArr.push(i * arr[i]);
         }
-        return indexArr;
+        for(let i = 0; i < indexArr.length; i++) {
+            sum += indexArr[i];
+        }
+        return sum;
     }
-    
 };
-// T.C. O(n)
+
 
 indexMultiplier([1, 2, 3, 4, 5])
 

@@ -15,6 +15,7 @@ Bonus: Try to complete this challenge in one line!
 
 */
 
+//T.C- O(n)
 
 const multiplyNums = (str) => {
     let arr = [];

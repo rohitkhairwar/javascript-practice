@@ -15,6 +15,8 @@ The minimum and maximum value of the given array are the inclusive bounds
 */
 
 
+//T.C. = O(n)
+
 const sumMissingNumbers = (arr) => {
     let paraArr = arr.sort((a, b) => a - b)
     let sum = 0;
@@ -25,7 +27,6 @@ const sumMissingNumbers = (arr) => {
     }
     return sum;
 };
-//T.C. = O(n)
 
 
 sumMissingNumbers([1, 3, 5, 7, 10]); 
